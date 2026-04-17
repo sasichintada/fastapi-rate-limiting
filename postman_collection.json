@@ -1,0 +1,119 @@
+{
+  "info": {
+    "name": "FastAPI Rate Limiting Service",
+    "_postman_id": "rate-limit-api-collection",
+    "description": "API Key + Rate Limiting System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Generate API Key",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"client_name\": \"sasi\",\n  \"email\": \"test@gmail.com\"\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/auth/generate-key",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["auth", "generate-key"]
+        }
+      }
+    },
+    {
+      "name": "2. Protected Data API",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "X-API-Key", "value": "PASTE_YOUR_API_KEY_HERE" }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/protected-data",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["api", "protected-data"]
+        }
+      }
+    },
+    {
+      "name": "3. User Info API",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "X-API-Key", "value": "PASTE_YOUR_API_KEY_HERE" }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/user-info",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["api", "user-info"]
+        }
+      }
+    },
+    {
+      "name": "4. Process Data API",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "X-API-Key", "value": "PASTE_YOUR_API_KEY_HERE" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"test\",\n  \"value\": 123\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/process-data",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["api", "process-data"]
+        }
+      }
+    },
+    {
+      "name": "5. Usage Stats",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "X-API-Key", "value": "PASTE_YOUR_API_KEY_HERE" }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/auth/usage-stats?hours=24",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["auth", "usage-stats"],
+          "query": [
+            { "key": "hours", "value": "24" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "6. Revoke API Key",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/auth/revoke-key/PASTE_API_KEY_HERE?admin_key=admin_secret_key_12345",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["auth", "revoke-key", "PASTE_API_KEY_HERE"],
+          "query": [
+            { "key": "admin_key", "value": "admin_secret_key_12345" }
+          ]
+        }
+      }
+    }
+  ]
+}
